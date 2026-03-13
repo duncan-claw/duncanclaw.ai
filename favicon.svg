@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Duncan Claw favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2028" />
+      <stop offset="100%" stop-color="#0b0d10" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9f72" />
+      <stop offset="100%" stop-color="#f66f41" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)" />
+  <path d="M18 17h12.5c10.3 0 17.5 5.9 17.5 15s-7.2 15-17.5 15H18V17zm11.3 24.4c6.7 0 10.8-3.4 10.8-9.4s-4.1-9.4-10.8-9.4h-3.2v18.8h3.2z" fill="#edf2f7"/>
+  <circle cx="47" cy="18" r="5" fill="url(#accent)" />
+</svg>
