@@ -1,0 +1,344 @@
+:root {
+  --bg: #0b0d10;
+  --panel: rgba(19, 22, 27, 0.82);
+  --panel-strong: rgba(28, 33, 40, 0.92);
+  --line: rgba(255, 255, 255, 0.09);
+  --text: #edf2f7;
+  --muted: #a7b2bf;
+  --accent: #f66f41;
+  --accent-soft: rgba(246, 111, 65, 0.15);
+  --glow: rgba(246, 111, 65, 0.32);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(246, 111, 65, 0.22), transparent 35%),
+    radial-gradient(circle at 85% 20%, rgba(124, 167, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, #111419 0%, #090b0d 100%);
+  color: var(--text);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.75'/%3E%3C/svg%3E");
+}
+
+.page-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.hero {
+  padding: 1.2rem;
+}
+
+.hero::after,
+.accent::after {
+  content: "";
+  position: absolute;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+  filter: blur(12px);
+}
+
+.hero::after {
+  top: -4rem;
+  right: -5rem;
+}
+
+.eyebrow,
+.kicker,
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: #d8dee6;
+}
+
+.eyebrow {
+  margin: 0 0 1.1rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
+  gap: 2rem;
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.kicker {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+h1,
+h2 {
+  margin: 0;
+  line-height: 0.96;
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  max-width: 10ch;
+}
+
+h1 span {
+  color: #cbd5e1;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  margin-bottom: 1rem;
+}
+
+p,
+li,
+a,
+span {
+  line-height: 1.7;
+}
+
+.hero-copy {
+  align-self: end;
+}
+
+.hero-copy p,
+.card p,
+.statement p,
+.feature-list li {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+}
+
+.button,
+.contact-link {
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.button:hover,
+.button:focus-visible,
+.contact-link:hover,
+.contact-link:focus-visible {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9f72 100%);
+  color: #120d0b;
+  border-color: transparent;
+}
+
+.button-secondary {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.statement {
+  margin: 1.2rem 0;
+  padding: 1.6rem 1.8rem;
+}
+
+.statement p {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: #d7dee7;
+  max-width: 48rem;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  padding: 1.7rem;
+}
+
+.card.tall {
+  grid-row: span 2;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 30%),
+    var(--panel-strong);
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.feature-list li {
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.feature-list strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.chip-cloud span {
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #dbe4ee;
+  font-size: 0.95rem;
+}
+
+.accent {
+  grid-column: span 2;
+  background:
+    radial-gradient(circle at top right, rgba(246, 111, 65, 0.18), transparent 35%),
+    var(--panel-strong);
+}
+
+.accent::after {
+  bottom: -7rem;
+  right: -4rem;
+}
+
+.contact-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: #fff5ef;
+  font-weight: 800;
+}
+
+.button:focus-visible,
+.contact-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.site-footer {
+  padding: 1.4rem 0.35rem 0;
+}
+
+.site-footer p {
+  margin: 0;
+  color: #8f9aa8;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .hero-grid,
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .card.tall,
+  .accent {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .page-shell {
+    width: min(100% - 1rem, 1120px);
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .card,
+  .statement {
+    border-radius: 22px;
+  }
+
+  .hero,
+  .card,
+  .statement {
+    padding-inline: 1rem;
+  }
+
+  .hero-grid {
+    gap: 1.5rem;
+    padding: 0.6rem 0.1rem 0.4rem;
+  }
+
+  .eyebrow {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
