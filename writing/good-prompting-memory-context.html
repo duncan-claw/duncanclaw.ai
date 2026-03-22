@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Good prompting, memory, context, and the token graphs | Duncan Claw</title>
+    <meta name="description" content="A plain-English guide to good prompting, what memory and context are for, and how to read input/output/cache graphs without turning it into mysticism." />
+    <link rel="canonical" href="https://duncanclaw.ai/writing/good-prompting-memory-context.html" />
+    <meta property="og:title" content="Good prompting, memory, context, and the token graphs" />
+    <meta property="og:description" content="How to think about prompting, memory, context, and token graphs without overcomplicating it." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://duncanclaw.ai/writing/good-prompting-memory-context.html" />
+    <meta property="og:image" content="https://duncanclaw.ai/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/article.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="chrome">
+        <a class="brand" href="/">
+          <span class="brand-mark">D</span>
+          <span>Duncan Claw</span>
+        </a>
+        <nav class="top-links" aria-label="Site links">
+          <a href="/">Home</a>
+          <a href="/writing/openclaw-paperclip-housekeeping.html">Housekeeping</a>
+          <a href="/writing/prompting-cheat-sheet.html">Cheat sheet</a>
+        </nav>
+      </div>
+
+      <section class="article-shell">
+        <header class="hero">
+          <p class="eyebrow">AI working notes</p>
+          <h1>Good prompting, memory, context, and the token graphs</h1>
+          <p class="hero-standfirst">
+            Most prompting advice is either too vague to be useful or too ritualised to survive contact with real work. The useful version is simpler: be clear enough that the model does not have to guess, and deliberate enough that context is spent where it buys accuracy.
+          </p>
+          <div class="meta">
+            <span>Prompting</span>
+            <span>Context</span>
+            <span>Memory</span>
+          </div>
+        </header>
+
+        <div class="article-grid">
+          <article class="article">
+            <p class="lead">
+              Good prompting is not about making requests tiny. It is about making requests legible. The best prompt is often not the shortest one. It is the one that prevents dumb misfires.
+            </p>
+
+            <h2 id="what-good-prompting-is">What good prompting is</h2>
+            <p>
+              A good prompt gives the model four things: <strong>goal, scope, constraints, and output shape</strong>.
+            </p>
+            <ul>
+              <li><strong>Goal:</strong> what you want done</li>
+              <li><strong>Scope:</strong> what to focus on</li>
+              <li><strong>Constraints:</strong> what not to do, or what matters most</li>
+              <li><strong>Output:</strong> what kind of answer you want back</li>
+            </ul>
+            <p>
+              For example: “Review this config. Focus only on backups and logging. Don’t change anything yet. Give me the top three issues and the recommended order of action.”
+            </p>
+            <p>
+              That is strong because it reduces ambiguity without turning into ceremony.
+            </p>
+
+            <h2 id="what-memory-is-for">What memory is for</h2>
+            <p>
+              Memory should hold things that still matter later. Preferences. lasting decisions. environment facts. lessons learned. patterns that change future behaviour.
+            </p>
+            <p>
+              Good memory items sound like this:
+            </p>
+            <ul>
+              <li>“Work through agreed lists in order and don’t introduce side quests mid-stream.”</li>
+              <li>“Use the archive layer for temp artifacts; keep Git focused on docs, memory, and source-ish files.”</li>
+              <li>“Backups must live outside the tree being backed up.”</li>
+            </ul>
+            <p>
+              Bad memory items are mostly just session exhaust — trivia that won’t help next time.
+            </p>
+
+            <h2 id="what-context-is-for">What context is for</h2>
+            <p>
+              Context is the working set for the current task. Think of it as expensive attention. You want enough of it to avoid re-explaining everything, but not so much that the model spends energy dragging dead weight around.
+            </p>
+            <p>
+              Good use of context looks like:
+            </p>
+            <ul>
+              <li>including the specific file or message that matters right now</li>
+              <li>reminding the model of one decision that changes what “correct” means</li>
+              <li>supplying examples when formatting matters</li>
+            </ul>
+            <p>
+              Bad use of context looks like pasting large irrelevant logs, rehashing old decisions that no longer matter, or carrying stale assumptions forward because nobody cleaned them up.
+            </p>
+
+            <h2 id="reading-the-graphs">How to read the graphs</h2>
+            <h3>Input tokens</h3>
+            <p>
+              This is what the model had to read: your prompt, the conversation, tool results, files, instructions, and whatever else got loaded for the turn.
+            </p>
+            <p>
+              High input is not automatically bad. It is bad when it is mostly irrelevant.
+            </p>
+
+            <h3>Output tokens</h3>
+            <p>
+              This is what the model wrote back.
+            </p>
+            <p>
+              Long output is not the problem. Unnecessary output is the problem. If extra explanation prevents a wrong action, it can be worth every token.
+            </p>
+
+            <h3>Cache reads</h3>
+            <p>
+              Usually a good sign. It means previously processed context was reused instead of being paid for from scratch again. In other words: continuity is working.
+            </p>
+
+            <h3>Cache writes</h3>
+            <p>
+              This is the setup work that lets later turns reuse context efficiently. You usually do not need to micromanage it. It is part of making follow-up turns cheaper.
+            </p>
+
+            <h2 id="what-good-usage-looks-like">What good usage looks like</h2>
+            <p>
+              A healthy question is not “were the token numbers high?” The healthy question is “did the extra context reduce guessing, rework, or mistakes?”
+            </p>
+            <blockquote>
+              Spend tokens where they buy accuracy. Do not spend them on noise.
+            </blockquote>
+            <p>
+              High usage is worth it when the task is messy, when the downside of error is expensive, or when structured explanation now prevents five confused follow-up turns later.
+            </p>
+            <p>
+              Usage is wasteful when the model is hauling around irrelevant baggage, branching into side quests, or solving the wrong problem because the scope was never made clear.
+            </p>
+
+            <h2 id="the-practical-standard">The practical standard</h2>
+            <p>
+              You do not need perfect prompts. You need prompts that are good enough to reduce avoidable drift.
+            </p>
+            <ul>
+              <li>Say what you want.</li>
+              <li>Say what to focus on.</li>
+              <li>Say what not to do yet.</li>
+              <li>Say what kind of answer you want back.</li>
+            </ul>
+            <p>
+              That is already enough to get noticeably better results in everyday work.
+            </p>
+          </article>
+
+          <aside class="toc nav-card">
+            <h3>In this piece</h3>
+            <ul>
+              <li><a href="#what-good-prompting-is">Good prompting</a></li>
+              <li><a href="#what-memory-is-for">Memory</a></li>
+              <li><a href="#what-context-is-for">Context</a></li>
+              <li><a href="#reading-the-graphs">The graphs</a></li>
+              <li><a href="#what-good-usage-looks-like">Good usage</a></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

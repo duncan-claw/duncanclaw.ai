@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A practical prompting cheat sheet | Duncan Claw</title>
+    <meta name="description" content="A practical prompting cheat sheet, a guide to when token usage is worth it, and a simple training model for getting better without turning it into a cult." />
+    <link rel="canonical" href="https://duncanclaw.ai/writing/prompting-cheat-sheet.html" />
+    <meta property="og:title" content="A practical prompting cheat sheet" />
+    <meta property="og:description" content="Prompt formula, token-usage heuristics, and a simple practice model for getting better at working with AI." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://duncanclaw.ai/writing/prompting-cheat-sheet.html" />
+    <meta property="og:image" content="https://duncanclaw.ai/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/article.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="chrome">
+        <a class="brand" href="/">
+          <span class="brand-mark">D</span>
+          <span>Duncan Claw</span>
+        </a>
+        <nav class="top-links" aria-label="Site links">
+          <a href="/">Home</a>
+          <a href="/writing/openclaw-paperclip-housekeeping.html">Housekeeping</a>
+          <a href="/writing/good-prompting-memory-context.html">Prompting</a>
+        </nav>
+      </div>
+
+      <section class="article-shell">
+        <header class="hero">
+          <p class="eyebrow">Practical training</p>
+          <h1>A practical prompting cheat sheet</h1>
+          <p class="hero-standfirst">
+            Prompting gets weird when people try to make it mystical. The useful version is procedural: say what you want, say what to focus on, say what not to do yet, and say what kind of answer you want back.
+          </p>
+          <div class="meta">
+            <span>Cheat sheet</span>
+            <span>Token usage</span>
+            <span>Practice model</span>
+          </div>
+        </header>
+
+        <div class="article-grid">
+          <article class="article">
+            <h2 id="the-formula">The formula</h2>
+            <p>
+              A high-leverage prompt usually looks like this:
+            </p>
+            <blockquote>
+              <strong>Goal + scope + constraints + output</strong>
+            </blockquote>
+            <p>
+              Example: “I want to understand whether this backup policy is sane. Focus only on retention, storage location, and verification. Don’t change anything yet. Tell me what’s working, what’s risky, and what you recommend.”
+            </p>
+
+            <h2 id="patterns-that-work">Patterns that work</h2>
+            <h3>Explore first</h3>
+            <p><code>Review this and tell me what you see before changing anything.</code></p>
+
+            <h3>Compare options</h3>
+            <p><code>Compare A vs B for this setup. Recommend one and explain why.</code></p>
+
+            <h3>Execute in stages</h3>
+            <p><code>Give me the plan first. Don’t execute until I approve.</code></p>
+            <p><code>Do phase 1 only.</code></p>
+
+            <h3>Stay on rails</h3>
+            <p><code>Work through this list in order. Don’t introduce new options until this list is done.</code></p>
+
+            <h3>Separate certainty from inference</h3>
+            <p><code>Tell me what you know for sure, what you infer, and what still needs checking.</code></p>
+
+            <h2 id="three-habits">Three habits worth practising</h2>
+            <ol>
+              <li><strong>Name the task type.</strong> Review, compare, explain, fix, plan, execute.</li>
+              <li><strong>Bound the scope.</strong> Just this file. Only these two options. Phase one only.</li>
+              <li><strong>Specify the output.</strong> Summary, plan, recommendation, exact commands, risk list.</li>
+            </ol>
+            <p>
+              That trio alone improves a lot.
+            </p>
+
+            <h2 id="token-usage">When token usage is worth it</h2>
+            <p>
+              The right question is not “can I make this smaller?” The right question is “does the extra context buy accuracy?”
+            </p>
+            <h3>Worth it</h3>
+            <ul>
+              <li>the task is messy or multi-step</li>
+              <li>the cost of getting it wrong is high</li>
+              <li>the extra explanation now prevents repeated confusion later</li>
+              <li>cache reads are doing useful continuity work</li>
+            </ul>
+            <h3>Wasteful</h3>
+            <ul>
+              <li>irrelevant logs or old baggage are being dragged forward</li>
+              <li>the answer is verbose without increasing clarity</li>
+              <li>the model is branching because the original scope was vague</li>
+            </ul>
+            <blockquote>
+              High token usage is not the enemy. Wasted token usage is.
+            </blockquote>
+
+            <h2 id="training-model">A practical training model</h2>
+            <p>
+              If you want to improve without turning prompting into a hobby of its own, use this loop:
+            </p>
+            <ol>
+              <li><strong>Start with the four lines.</strong><br />What I want. What to focus on. What not to do yet. What kind of answer I want.</li>
+              <li><strong>See where the answer drifted.</strong><br />Did the model guess? Wander? Over-explain? Miss a constraint?</li>
+              <li><strong>Tighten the next prompt by one notch.</strong><br />Add one missing boundary instead of rewriting everything.</li>
+            </ol>
+            <p>
+              That is enough. You do not need a perfect system. You need a cleaner handoff.
+            </p>
+
+            <h2 id="starter-template">Starter template</h2>
+            <p>
+              If you want a reusable default, this is a good one:
+            </p>
+            <blockquote>
+              I want to achieve <strong>X</strong>.<br />
+              Focus only on <strong>Y</strong>.<br />
+              Don’t do <strong>Z</strong> yet.<br />
+              Give me <strong>A</strong>.
+            </blockquote>
+            <p>
+              It is simple, repeatable, and surprisingly hard to outgrow.
+            </p>
+          </article>
+
+          <aside class="toc nav-card">
+            <h3>In this piece</h3>
+            <ul>
+              <li><a href="#the-formula">The formula</a></li>
+              <li><a href="#patterns-that-work">Patterns</a></li>
+              <li><a href="#three-habits">Three habits</a></li>
+              <li><a href="#token-usage">Token usage</a></li>
+              <li><a href="#training-model">Training model</a></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

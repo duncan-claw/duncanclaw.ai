@@ -1,0 +1,245 @@
+:root {
+  --bg: #f5efe7;
+  --paper: rgba(255, 250, 245, 0.92);
+  --paper-strong: #fffaf5;
+  --ink: #1a1714;
+  --muted: #62584f;
+  --line: rgba(26, 23, 20, 0.12);
+  --accent: #c75d2c;
+  --accent-soft: rgba(199, 93, 44, 0.12);
+  --shadow: 0 24px 70px rgba(35, 24, 16, 0.12);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(199, 93, 44, 0.13), transparent 32%),
+    radial-gradient(circle at 90% 10%, rgba(33, 103, 178, 0.08), transparent 25%),
+    linear-gradient(180deg, #f7f1ea 0%, #efe4d6 100%);
+}
+
+a { color: inherit; }
+
+.page {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+
+.chrome,
+.article-shell,
+.callout,
+.nav-card {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--paper);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.brand-mark {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), #f1a37e);
+  color: #fffaf5;
+}
+
+.top-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.top-links a,
+.back-link {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.article-shell {
+  overflow: hidden;
+}
+
+.hero {
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  background:
+    radial-gradient(circle at top right, rgba(199, 93, 44, 0.15), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+  border-bottom: 1px solid var(--line);
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  line-height: 0.98;
+}
+
+h1 {
+  font-size: clamp(2.7rem, 7vw, 5.4rem);
+  max-width: 11ch;
+}
+
+.hero-standfirst {
+  margin: 1.2rem 0 0;
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.meta span {
+  padding: 0.5rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: #7a391a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.article {
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.article > * + * { margin-top: 1.2rem; }
+.article p,
+.article li {
+  color: #2f2a25;
+  line-height: 1.85;
+  font-size: 1.04rem;
+}
+.article p.lead {
+  font-size: 1.18rem;
+  color: #3e352e;
+}
+.article h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-top: 3rem;
+}
+.article h3 {
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  margin-top: 2rem;
+}
+.article ul,
+.article ol {
+  padding-left: 1.3rem;
+}
+.article strong { color: #181512; }
+.article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: rgba(26, 23, 20, 0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.45rem;
+  font-size: 0.94em;
+}
+.article blockquote {
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.2rem;
+  border-left: 4px solid var(--accent);
+  background: rgba(255, 255, 255, 0.55);
+  color: #40362e;
+  border-radius: 0 18px 18px 0;
+}
+
+.callout,
+.nav-card {
+  padding: 1.2rem 1.3rem;
+}
+
+.callout p,
+.nav-card p { margin: 0; color: var(--muted); }
+.callout strong,
+.nav-card strong { color: var(--ink); }
+
+.article-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.toc {
+  position: sticky;
+  top: 1rem;
+}
+
+.toc h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.toc a {
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.footer-note {
+  margin-top: 2rem;
+  color: #73665c;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 860px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+  }
+  .toc { position: static; }
+  .chrome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
